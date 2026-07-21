@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northbridge Consulting — Strategy &amp; Operations Advisory</title>
+<meta name="description" content="Northbridge Consulting helps growing companies fix operations, sharpen strategy, and scale with confidence.">
+<meta name="author" content="Hassan Ahmed">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mocha: #A5856F;
+    --mocha-dark: #7C6350;
+    --blue: #A0D4E0;
+    --blue-dark: #4C8798;
+    --grey: #F2F0EA;
+    --ink: #23201B;
+    --ink-soft: #4A443C;
+    --white: #FFFFFF;
+    --font-head: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --radius: 12px;
+    --max-w: 1200px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--mocha-dark);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(35,32,27,0.08);
+  }
+
+  nav.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 72px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .logo-mark {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .logo-mark::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    background: var(--mocha);
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    display: none;
+    background: var(--ink);
+    color: var(--white);
+    padding: 0.65rem 1.4rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: background 0.2s ease;
+  }
+  .nav-cta:hover { background: var(--mocha-dark); }
+
+  .menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .menu-btn span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+  .mobile-panel {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+    border-top: 1px solid rgba(35,32,27,0.08);
+  }
+  .mobile-panel.open { display: flex; }
+  .mobile-panel a { font-weight: 600; }
+  .mobile-panel .nav-cta { display: inline-block; width: fit-content; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); background: var(--grey); }
+
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mocha-dark);
+    margin-bottom: 1rem;
+  }
+  .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--mocha-dark); }
+
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); max-width: 18ch; margin-bottom: 1.25rem; }
+  .hero h1 em { font-style: normal; color: var(--mocha-dark); }
+
+  .hero p.lead {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.7rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.93rem;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary { background: var(--ink); color: var(--white); }
+  .btn-primary:hover { background: var(--mocha-dark); }
+  .btn-ghost { background: transparent; border-color: rgba(35,32,27,0.25); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); background: rgba(35,32,27,0.03); }
+
+  /* ---------- Client strip ---------- */
+  .client-strip { border-bottom: 1px solid rgba(35,32,27,0.08); padding-block: 1.75rem; }
+  .client-strip .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+  .client-strip .label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); flex-basis: 100%; }
+  .client-strip .name { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: rgba(35,32,27,0.4); }
+
+  /* ---------- Section shell ---------- */
+  section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+
+  .section-head { max-width: 60ch; margin-bottom: clamp(2rem, 5vw, 3rem); }
+  .section-head.center { margin-inline: auto; text-align: center; }
+  .section-head .eyebrow { margin-bottom: 0.75rem; }
+  .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin-bottom: 0.75rem; }
+  .section-head p { color: var(--ink-soft); font-size: 1.02rem; }
+
+  /* ---------- Services ---------- */
+  .services-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(35,32,27,0.1); border: 1px solid rgba(35,32,27,0.1); }
+
+  .service-card {
+    background: var(--white);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.25s ease;
+  }
+  .service-card:hover { background: var(--grey); }
+  .service-index { font-family: var(--font-head); font-weight: 800; font-size: 0.85rem; color: var(--blue-dark); letter-spacing: 0.04em; }
+  .service-card h3 { font-size: 1.15rem; }
+  .service-card p { color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- Approach ---------- */
+  .approach-band { background: var(--ink); color: var(--grey); border-radius: 16px; margin-inline: clamp(1.25rem, 4vw, 2.5rem); padding: clamp(2.25rem, 6vw, 3.75rem); }
+  .approach-band .section-head p { color: rgba(242,240,234,0.68); }
+  .approach-band .section-head h2 { color: var(--grey); }
+  .approach-band .eyebrow { color: var(--blue); }
+  .approach-band .eyebrow::before { background: var(--blue); }
+
+  .steps-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .step { display: flex; gap: 1.1rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(242,240,234,0.12); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-num { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--blue); min-width: 2.4ch; }
+  .step h3 { font-size: 1.03rem; margin-bottom: 0.35rem; color: var(--grey); }
+  .step p { color: rgba(242,240,234,0.62); font-size: 0.9rem; }
+
+  /* ---------- Results / stats ---------- */
+  .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; text-align: center; }
+  .result .num { font-family: var(--font-head); font-weight: 800; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--mocha-dark); }
+  .result .lbl { font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.35rem; }
+
+  /* ---------- Team ---------- */
+  .team-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  .team-card { display: flex; flex-direction: column; gap: 0.9rem; }
+  .team-photo { aspect-ratio: 1; border-radius: var(--radius); background: linear-gradient(155deg, var(--blue) 0%, var(--grey) 55%, var(--mocha) 130%); }
+  .team-card h3 { font-size: 1.05rem; }
+  .team-card .role { font-size: 0.85rem; color: var(--mocha-dark); font-weight: 700; margin-top: -0.5rem; }
+  .team-card p.bio { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* ---------- Testimonial ---------- */
+  .quote { text-align: center; max-width: 54ch; margin-inline: auto; }
+  .quote blockquote { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.3rem, 3.5vw, 1.85rem); line-height: 1.42; margin-bottom: 1.25rem; }
+  .quote cite { font-style: normal; font-size: 0.9rem; color: var(--ink-soft); font-weight: 500; }
+
+  /* ---------- Final CTA ---------- */
+  .cta-band {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--mocha) 100%);
+    border-radius: 16px;
+    margin-inline: clamp(1.25rem, 4vw, 2.5rem);
+    padding: clamp(2.5rem, 6vw, 4rem);
+    text-align: center;
+    color: var(--ink);
+  }
+  .cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 0.75rem; }
+  .cta-band p { max-width: 46ch; margin: 0 auto 1.75rem; color: rgba(35,32,27,0.75); }
+
+  /* ---------- Booking form ---------- */
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .booking-form {
+    background: var(--grey);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label { font-size: 0.85rem; font-weight: 700; color: var(--ink); }
+  .req { color: var(--mocha-dark); }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    border: 1.5px solid rgba(35,32,27,0.18);
+    background: var(--white);
+    color: var(--ink);
+    width: 100%;
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--blue-dark);
+    box-shadow: 0 0 0 3px rgba(76,135,152,0.15);
+  }
+
+  .field.invalid input,
+  .field.invalid select,
+  .field.invalid textarea {
+    border-color: #C0473F;
+  }
+
+  .error-msg {
+    font-size: 0.8rem;
+    color: #C0473F;
+    min-height: 1em;
+    display: none;
+  }
+  .field.invalid .error-msg,
+  .checkbox-row.invalid + .error-msg { display: block; }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .checkbox-row input { margin-top: 0.2rem; width: 16px; height: 16px; accent-color: var(--mocha-dark); flex-shrink: 0; }
+
+  .booking-form .btn { align-self: flex-start; margin-top: 0.25rem; }
+
+  .form-status {
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: 1.2em;
+  }
+  .form-status.success { color: #3A7D5C; }
+  .form-status.error { color: #C0473F; }
+
+  .booking-list-panel {
+    background: var(--white);
+    border: 1px solid rgba(35,32,27,0.1);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+  .booking-list-panel h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .panel-hint { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1.25rem; }
+
+  .booking-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; max-height: 420px; overflow-y: auto; }
+
+  .booking-list .empty-state { font-size: 0.88rem; color: var(--ink-soft); font-style: italic; }
+
+  .booking-item {
+    border: 1px solid rgba(35,32,27,0.1);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    animation: slideIn 0.3s ease;
+  }
+  .booking-item .bi-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .booking-item .bi-name { font-weight: 700; font-size: 0.92rem; }
+  .booking-item .bi-date { font-size: 0.75rem; color: var(--blue-dark); font-weight: 700; white-space: nowrap; }
+  .booking-item .bi-service { font-size: 0.82rem; color: var(--mocha-dark); font-weight: 600; margin-bottom: 0.25rem; }
+  .booking-item .bi-company { font-size: 0.8rem; color: var(--ink-soft); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Footer ---------- */
+  footer { padding-block: 2.5rem 2rem; border-top: 1px solid rgba(35,32,27,0.08); }
+  .footer-grid { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+  .footer-brand p { color: var(--ink-soft); font-size: 0.9rem; max-width: 32ch; margin-top: 0.5rem; }
+  .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .footer-col h4 { font-family: var(--font-head); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; color: var(--ink-soft); }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; }
+  .footer-col a:hover { color: var(--mocha-dark); }
+
+  .footer-bottom { display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8rem; color: var(--ink-soft); padding-top: 1.5rem; border-top: 1px solid rgba(35,32,27,0.08); }
+
+  /* ---------- Tablet ---------- */
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+    .menu-btn { display: none; }
+
+    .hero h1 { max-width: 22ch; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+    .booking-layout { grid-template-columns: 1.4fr 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .results-grid { grid-template-columns: repeat(4, 1fr); }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-list { flex-direction: row; }
+    .step { flex-direction: column; border-bottom: none; border-left: 1px solid rgba(242,240,234,0.12); padding: 0 0 0 1.25rem; }
+    .step:first-child { border-left: none; padding-left: 0; }
+
+    .footer-grid { flex-direction: row; justify-content: space-between; }
+    .footer-cols { grid-template-columns: repeat(3, 1fr); flex: 1; margin-left: 4rem; }
+    .footer-bottom { flex-direction: row; justify-content: space-between; }
+  }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .team-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap" aria-label="Primary">
+    <a href="#top" class="logo">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Northbridge
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Schedule a consultation</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#services">Services</a>
+    <a href="#approach">Approach</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary nav-cta">Schedule a consultation</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Strategy &amp; Operations Advisory</p>
+        <h1>We help growing companies fix what's <em>actually</em> slowing them down.</h1>
+        <p class="lead">Northbridge Consulting partners with founders and operations leaders to diagnose bottlenecks, restructure processes, and build the systems that let a company scale without breaking.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Schedule a consultation</a>
+          <a href="#services" class="btn btn-ghost">View our services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="client-strip">
+    <div class="wrap">
+      <span class="label">Trusted by teams at</span>
+      <span class="name">Ferro Studio</span>
+      <span class="name">Loop Editorial</span>
+      <span class="name">North Field Labs</span>
+      <span class="name">Quietwork Co.</span>
+      <span class="name">Harrow &amp; Finch</span>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2>Advisory built around the problems that actually stall growth</h2>
+        <p>We don't sell frameworks off a shelf. Every engagement starts with understanding how your business actually runs.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-index">01</span>
+          <h3>Operations audit</h3>
+          <p>A full review of your processes, tooling, and team structure to find where time and money are leaking.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-index">02</span>
+          <h3>Growth strategy</h3>
+          <p>Clear, sequenced plans for entering new markets, launching products, or scaling existing revenue lines.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-index">03</span>
+          <h3>Process redesign</h3>
+          <p>We rebuild the workflows that are costing you time — approvals, handoffs, reporting — from the ground up.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-index">04</span>
+          <h3>Organizational structure</h3>
+          <p>Right-sizing teams and reporting lines so decisions move at the speed your business needs.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-index">05</span>
+          <h3>Financial planning</h3>
+          <p>Forecasting and budget structures that give leadership an honest, current view of the business.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-index">06</span>
+          <h3>Change management</h3>
+          <p>Getting a whole organization to actually adopt the changes — not just approve them in a meeting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="approach-band">
+        <div class="section-head">
+          <p class="eyebrow">Our approach</p>
+          <h2>Diagnose before we prescribe</h2>
+        </div>
+        <div class="steps-list">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div>
+              <h3>Discovery</h3>
+              <p>Two weeks embedded with your team to understand how work actually happens, not how it's documented.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div>
+              <h3>Diagnosis</h3>
+              <p>A clear, evidence-backed report on what's working, what isn't, and why.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div>
+              <h3>Roadmap</h3>
+              <p>A sequenced plan with owners and timelines — not a slide deck that sits in a drive folder.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <div>
+              <h3>Implementation support</h3>
+              <p>We stay through execution, adjusting the plan as real-world friction shows up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Track record</p>
+        <h2>Engagements that show up in the numbers</h2>
+      </div>
+      <div class="results-grid">
+        <div class="result"><div class="num">120+</div><div class="lbl">Engagements delivered</div></div>
+        <div class="result"><div class="num">34%</div><div class="lbl">Avg. reduction in process time</div></div>
+        <div class="result"><div class="num">18</div><div class="lbl">Industries served</div></div>
+        <div class="result"><div class="num">92%</div><div class="lbl">Clients who return for phase two</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap quote">
+      <blockquote>"Northbridge didn't hand us a strategy deck and leave. They stayed until the new process was actually how we worked."</blockquote>
+      <cite>— Operations Director, North Field Labs</cite>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our team</p>
+        <h2>Advisors who've run operations, not just studied them</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo" aria-hidden="true"></div>
+          <h3>Amara Osei</h3>
+          <div class="role">Managing Partner</div>
+          <p class="bio">Former VP Operations at a 400-person logistics company. Leads discovery on every engagement.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo" aria-hidden="true"></div>
+          <h3>Daniel Ferro</h3>
+          <div class="role">Principal, Strategy</div>
+          <p class="bio">Twelve years advising growth-stage companies on market entry and revenue structure.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo" aria-hidden="true"></div>
+          <h3>Priya Nandan</h3>
+          <div class="role">Principal, Process</div>
+          <p class="bio">Specializes in workflow redesign for teams scaling past their original systems.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo" aria-hidden="true"></div>
+          <h3>Elias Voss</h3>
+          <div class="role">Director, Finance</div>
+          <p class="bio">Builds the forecasting and budget models that keep leadership decisions grounded.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Get started</p>
+        <h2>Book your free consultation</h2>
+        <p>Tell us a bit about your business. We reply within one business day to confirm a time.</p>
+      </div>
+
+      <div class="booking-layout">
+        <form class="booking-form" id="bookingForm" novalidate>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="fullName">Full name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="Jordan Blake">
+              <p class="error-msg" id="err-fullName"></p>
+            </div>
+            <div class="field">
+              <label for="company">Company <span class="req">*</span></label>
+              <input type="text" id="company" name="company" autocomplete="organization" placeholder="Blake &amp; Co.">
+              <p class="error-msg" id="err-company"></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="jordan@company.com">
+              <p class="error-msg" id="err-email"></p>
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+92 300 1234567">
+              <p class="error-msg" id="err-phone"></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="service">Service interested in <span class="req">*</span></label>
+              <select id="service" name="service">
+                <option value="">Select a service</option>
+                <option value="Operations audit">Operations audit</option>
+                <option value="Growth strategy">Growth strategy</option>
+                <option value="Process redesign">Process redesign</option>
+                <option value="Organizational structure">Organizational structure</option>
+                <option value="Financial planning">Financial planning</option>
+                <option value="Change management">Change management</option>
+              </select>
+              <p class="error-msg" id="err-service"></p>
+            </div>
+            <div class="field">
+              <label for="prefDate">Preferred date <span class="req">*</span></label>
+              <input type="date" id="prefDate" name="prefDate">
+              <p class="error-msg" id="err-prefDate"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">What's going on right now? <span class="req">*</span></label>
+            <textarea id="message" name="message" rows="4" placeholder="A few sentences about the problem you're trying to solve..."></textarea>
+            <p class="error-msg" id="err-message"></p>
+          </div>
+
+          <label class="checkbox-row" for="consent">
+            <input type="checkbox" id="consent" name="consent">
+            <span>I agree to be contacted about this request. <span class="req">*</span></span>
+          </label>
+          <p class="error-msg" id="err-consent"></p>
+
+          <button type="submit" class="btn btn-primary" id="submitBtn">Request consultation</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="booking-list-panel">
+          <h3>Submitted requests <span id="reqCount">(0)</span></h3>
+          <p class="panel-hint">This runs entirely in your browser for the demo — nothing is sent anywhere.</p>
+          <ul class="booking-list" id="bookingList">
+            <li class="empty-state" id="emptyState">No requests yet. Submit the form to see it appear here.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          Northbridge
+        </a>
+        <p>Strategy and operations advisory for companies that have outgrown their old systems.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Operations audit</a></li>
+            <li><a href="#services">Growth strategy</a></li>
+            <li><a href="#services">Process redesign</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Northbridge Consulting. All rights reserved.</p>
+      <p>Designed &amp; built by Hassan Ahmed, Full Stack Developer — semantic HTML, CSS Grid &amp; Flexbox, no frameworks.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  mobilePanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ---------- Booking form ---------- */
+  const bookingForm = document.getElementById('bookingForm');
+  const formStatus = document.getElementById('formStatus');
+  const bookingList = document.getElementById('bookingList');
+  const emptyState = document.getElementById('emptyState');
+  const reqCount = document.getElementById('reqCount');
+  let submittedCount = 0;
+
+  // Set min date to today so people can't book in the past
+  const prefDateInput = document.getElementById('prefDate');
+  const todayStr = new Date().toISOString().split('T')[0];
+  prefDateInput.setAttribute('min', todayStr);
+
+  const phonePattern = /^[+\d][\d\s\-()]{6,}$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setFieldError(id, message) {
+    const field = document.getElementById(id).closest('.field');
+    const errEl = document.getElementById('err-' + id);
+    if (message) {
+      field.classList.add('invalid');
+      errEl.textContent = message;
+    } else {
+      field.classList.remove('invalid');
+      errEl.textContent = '';
+    }
+  }
+
+  function setConsentError(message) {
+    const row = document.querySelector('.checkbox-row');
+    const errEl = document.getElementById('err-consent');
+    if (message) {
+      row.classList.add('invalid');
+      errEl.textContent = message;
+    } else {
+      row.classList.remove('invalid');
+      errEl.textContent = '';
+    }
+  }
+
+  function validateForm(data) {
+    let isValid = true;
+
+    if (!data.fullName.trim() || data.fullName.trim().length < 2) {
+      setFieldError('fullName', 'Please enter your full name.');
+      isValid = false;
+    } else {
+      setFieldError('fullName', '');
+    }
+
+    if (!data.company.trim()) {
+      setFieldError('company', 'Please enter your company name.');
+      isValid = false;
+    } else {
+      setFieldError('company', '');
+    }
+
+    if (!emailPattern.test(data.email.trim())) {
+      setFieldError('email', 'Please enter a valid email address.');
+      isValid = false;
+    } else {
+      setFieldError('email', '');
+    }
+
+    if (!phonePattern.test(data.phone.trim())) {
+      setFieldError('phone', 'Please enter a valid phone number.');
+      isValid = false;
+    } else {
+      setFieldError('phone', '');
+    }
+
+    if (!data.service) {
+      setFieldError('service', 'Please select a service.');
+      isValid = false;
+    } else {
+      setFieldError('service', '');
+    }
+
+    if (!data.prefDate) {
+      setFieldError('prefDate', 'Please choose a preferred date.');
+      isValid = false;
+    } else if (data.prefDate < todayStr) {
+      setFieldError('prefDate', 'Date cannot be in the past.');
+      isValid = false;
+    } else {
+      setFieldError('prefDate', '');
+    }
+
+    if (!data.message.trim() || data.message.trim().length < 10) {
+      setFieldError('message', 'Please add a little more detail (at least 10 characters).');
+      isValid = false;
+    } else {
+      setFieldError('message', '');
+    }
+
+    if (!data.consent) {
+      setConsentError('Please confirm you agree to be contacted.');
+      isValid = false;
+    } else {
+      setConsentError('');
+    }
+
+    return isValid;
+  }
+
+  function addBookingToList(data) {
+    if (emptyState) emptyState.remove();
+
+    const item = document.createElement('li');
+    item.className = 'booking-item';
+    const formattedDate = new Date(data.prefDate + 'T00:00:00').toLocaleDateString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric'
+    });
+
+    item.innerHTML = `
+      <div class="bi-top">
+        <span class="bi-name"></span>
+        <span class="bi-date"></span>
+      </div>
+      <div class="bi-service"></div>
+      <div class="bi-company"></div>
+    `;
+    item.querySelector('.bi-name').textContent = data.fullName;
+    item.querySelector('.bi-date').textContent = formattedDate;
+    item.querySelector('.bi-service').textContent = data.service;
+    item.querySelector('.bi-company').textContent = data.company;
+
+    bookingList.prepend(item);
+
+    submittedCount++;
+    reqCount.textContent = '(' + submittedCount + ')';
+  }
+
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = {
+      fullName: document.getElementById('fullName').value,
+      company: document.getElementById('company').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      service: document.getElementById('service').value,
+      prefDate: document.getElementById('prefDate').value,
+      message: document.getElementById('message').value,
+      consent: document.getElementById('consent').checked
+    };
+
+    const isValid = validateForm(data);
+
+    if (!isValid) {
+      formStatus.textContent = 'Please fix the highlighted fields and try again.';
+      formStatus.className = 'form-status error';
+      const firstInvalid = bookingForm.querySelector('.invalid input, .invalid select, .invalid textarea, .checkbox-row.invalid input');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    addBookingToList(data);
+
+    formStatus.textContent = `Thanks, ${data.fullName.split(' ')[0]} — we'll reach out at ${data.email} within one business day.`;
+    formStatus.className = 'form-status success';
+
+    bookingForm.reset();
+    prefDateInput.setAttribute('min', todayStr);
+  });
+
+  // Clear a field's error state as soon as the user starts fixing it
+  bookingForm.querySelectorAll('input, select, textarea').forEach((el) => {
+    el.addEventListener('input', () => {
+      if (el.id === 'consent') {
+        if (el.checked) setConsentError('');
+      } else {
+        const field = el.closest('.field');
+        if (field && field.classList.contains('invalid') && el.value.trim()) {
+          setFieldError(el.id, '');
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
